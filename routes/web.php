@@ -130,6 +130,13 @@ Route::get('/admin/edit-blog-info/{id}',[BlogController::class,'editBlog']);
 Route::post('/editblog_form/{id}',[BlogController::class,'update']);
 Route::get('/admin/delete-blog/{id}',[BlogController::class,'delete']);
 
+Route::get('/admin/student/add-student',[studentController::class,'addStudent']);
+Route::post('/upload_student',[studentController::class,'saveStudent']);
+Route::get('/admin/student/manage-student',[studentController::class,'manageStudent']);
+Route::get('/admin/edit-student/{id}',[studentController::class,'editStudent']);
+Route::post('/editstudent_form/{id}',[studentController::class,'update']);
+Route::get('/admin/delete-student/{id}',[studentController::class,'delete']);
+
 
 Route::get('/showteam',[AdminController::class,'showteam']);
 Route::get('/showadmission',[AdminController::class,'showadmission']);

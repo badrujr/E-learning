@@ -17,6 +17,7 @@ use App\Models\CourseVideo;
 use App\Models\Quiz;
 use DB;
 
+
 class studentController extends Controller
 {
     public function fillAdmissionForm(){
@@ -98,6 +99,28 @@ class studentController extends Controller
     public function attemptQuiz($id){
         $course = CourseVideo::find($id);
         return view('student.quiz/attempt-quiz',compact('course'));
+    }
+
+    public function manageStudent(){
+        $students = Student::latest()->get();
+        return view('admin.student/manage-student',compact('students'));
+    }
+    public function delete($id){
+        $delete = Student::find($id);
+        if(!$delete){
+            return back()->with('message','student details is not available'); 
+        }
+        try{
+            
+          $delete->delete();
+          return back()->with('message','student removed succesfully'); 
+
+
+        }catch(\Exception $e){
+            return back()->with('message','You can not Delete a student information in the system'); 
+
+        }
+
     }
  
 }

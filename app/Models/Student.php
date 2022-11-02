@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class Student extends Model
 {
@@ -34,5 +35,9 @@ class Student extends Model
     public function like()
     {
         return $this->hasOne(CourseLike::class);
+    }
+    public function gender()
+    {
+        return $this->belongsTo(Gender::class);
     }
 }

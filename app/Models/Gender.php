@@ -8,4 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Gender extends Model
 {
     use HasFactory;
+
+    protected $table = 'genders';
+
+    protected $primaryKey = 'id';
+
+    public function student(){
+        return $this->hasOne(Student::class);
+    }
 }
