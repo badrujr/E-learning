@@ -8,6 +8,7 @@ use App\Models\Course;
 use App\Models\Cart;
 use App\Models\Student;
 use Auth;
+use Session;
 
 class CartController extends Controller
 {
@@ -16,6 +17,11 @@ class CartController extends Controller
         $sum = Cart::sum('price');
         return view('student.cart/cart',compact('carts','sum'));
     }
+    static function cartItem(){
+        $userId = Auth::user()->id;
+        return Cart::where('student_id',$userId)->count();
+    }
+
     public function saveCart(request $request){
         $cart = new Cart;
 
