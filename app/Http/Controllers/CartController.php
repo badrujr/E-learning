@@ -48,4 +48,10 @@ class CartController extends Controller
         }
     
     }
+
+    public function deleteCartItem($id){
+        $deleteCartItem = Cart::find($id);
+        $deleteCartItem->delete();
+        return back()->with('message','cart removed succesfully'); 
+    }
 }

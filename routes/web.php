@@ -149,9 +149,11 @@ Route::get('/student/tutor/profile/{id}',[studentController::class,'viewProfile'
 Route::get('/student/video/playlist/{id}',[studentController::class,'viewPlaylist']);
 Route::get('/student/video/watch-video/{id}',[studentController::class,'watchVideo']);
 Route::get('/student/quiz/attempt-quiz/{id}',[studentController::class,'attemptQuiz']);
+
 Route::get('/student/cart/cart',[CartController::class,'cart']);
 Route::post('/upload_cart',[CartController::class,'saveCart']);
 Route::get('/student/payment/payment',[PaymentController::class,'createPayment']);
+Route::get('/student/delete-cart/{id}',[CartController::class,'deleteCartItem']);
 
 Route::get('/student/testimonial/add-testimonial',[TestimonialController::class,'addTestimonial']);
 Route::post('/upload_testimonial',[TestimonialController::class,'savetestimonial']);

@@ -16,16 +16,26 @@
 
   <style>
     /* ----- payment page ----- */
+    body{
+     
+      font-size:20px;
+    }
 hr{
     border: 1px solid #f1f3f5;
 }
 
 .payment-container{
     margin: 5% 20% 5% 20%;
+     background-color:#ffffff;
+     border-radius:5px;
 }
 
 .amount{
     padding-bottom: 30px;
+}
+.amount h3{
+  padding-top:10px;
+    padding-left: 30px;
 }
 
 .amount-to-pay{
@@ -34,8 +44,14 @@ hr{
     padding-top: 10px;
 }
 
+.amount-to-pay p{
+  padding-left: 30px;
+  font-size: 20px;
+}
+
 .currency{
-    font-size: 26px;
+    font-size: 20px;
+    padding-right:10px;
 }
 
 .payment-body{
@@ -56,6 +72,13 @@ hr{
     grid-template-columns: 1fr;
     margin: 0 20% 5% 20%;
     gap: 20px;
+   
+   
+}
+.payment-button button{
+  background-color:darkblue;
+    color:#ffffff;
+    font-size:20px;
 }
 
 .payment-info{
@@ -77,12 +100,22 @@ hr{
     padding-top: 20px;
     gap: 30px;
 }
+.col-1 button{
+  background-color:darkblue;
+    color:#ffffff;
+    font-size:20px;
+}
 
 .col-2{
     display: grid;
     grid-template-columns: 22% 22% 48%;
     padding-top: 20px;
     gap: 30px;
+}
+.col-2 button{
+  background-color:darkblue;
+    color:#ffffff;
+    font-size:20px;
 }
 
 
@@ -190,11 +223,11 @@ button{
         </div>
         <div class="amount-to-pay">
           <p>Amout to Pay:</p>
-          <p>KES<span class="currency">60,000.00</span></p>
+          <p>KES <span class="currency">60,000</span></p>
         </div>
       </div>
       <div>
-        <h3>Choose payment method</h3>
+        <h3 style="padding-left:30px;">Choose payment method</h3>
       </div>
       <div class="payment-body">
         <!-- accordian starts -->
@@ -214,7 +247,7 @@ button{
                 <div class="col-2">
                   <input type="text" placeholder="MM/YY" />
                   <input type="text" placeholder="CVC" />
-                  <button>submit</button>
+                  <button>pay now</button>
                 </div>
               </div>
             </div>
@@ -242,7 +275,7 @@ button{
                 <div class="payment-input">
                   <div class="col-1">
                     <input type="text" placeholder="Mobile Number" />
-                    <button>submit</button>
+                    <button>pay now</button>
                   </div>
                 </div>
               </div>
@@ -252,7 +285,7 @@ button{
                 <div class="payment-input">
                   <div class="col-1">
                     <input type="text" placeholder="Mobile Number" />
-                    <button>submit</button>
+                    <button>pay now</button>
                   </div>
                 </div>
               </div>
@@ -266,7 +299,7 @@ button{
     </div>
     <!-- button starts -->
     <div class="payment-button">
-      <button>Back to Cart</button>
+      <button><a href="{{url('student/cart/cart')}}" style="color:#ffffff;">Back to Cart</a></button>
     </div>
     <!-- button ends -->
 
