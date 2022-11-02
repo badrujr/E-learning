@@ -4,7 +4,7 @@
    <meta charset="UTF-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>Manage categories</title>
+   <title>Level</title>
 
    <!-- font awesome cdn link  -->
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
@@ -36,7 +36,7 @@
       </div>
 
       <div class="profile">
-         <img src="./assets/images/admin.jpeg" class="image" alt="">
+         <img src="./assets/images/pic-1.jpg" class="image" alt="">
          
          <h3 class="name">{{Auth::user()->name}}</h3>
          <p class="role">{{Auth::user()->role}}</p>
@@ -72,46 +72,21 @@
 
 @include('admin.sidebar')
 
-<section class="teachers">
+<section class="form-container">
 
-<h1 class="heading">our course category </h1>
-
-<form action="" method="post" class="search-tutor">
-   <input type="text" name="search_box" placeholder="search level..." required maxlength="100">
-   <button type="submit" class="fas fa-search" name="search_level"></button>
-</form>
-@if(session()->has('message'))
-        <div class="alert alert-warning alert-has-icon" style="color:red; font-size:20px;">
-        {{session()->get('message')}}
-        </div>
-        @else
-        <div class="" style="color:red !important; font-size:20px;">
-        {{session()->get('message')}}
-        </div>
-      @endif
-<div class="box-container">
-@forelse($categories as $category)
-   <div class="box">
-      <div class="tutor">
-         <img src="coursecategoryimage/{{$category->image}}" alt="">
-         <div>
-            <h3>Course category: {{$category->name}}</h3>
-            <span>Course Level: {{$category->level->name}}</span>
-         </div>
-      </div>
-      <p>Description: {{$category->description}}</p>
-      <a href="{{url('admin/category/edit-category',$category->id)}}" class="inline-btn"><i class="fas fa-pencil" style="color:#ffffff !important;"></i> Edit</a>
-      <a href="{{url('admin/delete-category',$category->id)}}" onclick="return confirm('Are you sure you want to delete?')" class="inline-btn"><i class="fas fa-trash" style="color:red !important;"></i> Delete</a>
-   </div>
-   @empty
-			<div class="box offer">
-            <p>No course category available</p>
-            </div>
-            
-	@endforelse
-
-
-</div>
+   <form action="{{url('editlevel_form',$edit_level->id)}}" method="post" enctype="multipart/form-data">
+   @csrf
+      <h3>Edit course level</h3>
+      <p>name <span>*</span></p>
+      <input type="text" name="name" value="{{$edit_level->name}}"  required maxlength="50" class="box">
+      <input type="submit" value="submit" name="submit" class="btn">
+      @if(session()->has('message'))
+                    <div class="alert alert-success alert-has-icon" style="color:green; font-size:20px;">
+                        
+                        {{session()->get('message')}}
+                    </div>
+                  @endif
+   </form>
 
 </section>
 <!-- custom js file link  -->

@@ -17,6 +17,8 @@ use App\Models\Quiz;
 use App\Models\Blog;
 use App\Models\Testimonial;
 use App\Models\Comment;
+use App\Models\Tutor;
+use App\Models\Profession;
 use DB;
 
 class HomeController extends Controller
@@ -44,7 +46,9 @@ class HomeController extends Controller
                 $categories = CourseCategory::all()->count();
                 $count = Course::all()->count();
                 $courses = Course::latest()->get();
-                return view('admin.home',compact('country','level','user','student','quiz','categories','courses','count'));
+                $tutor = Tutor::all()->count();
+                $profession = Profession::all()->count();
+                return view('admin.home',compact('country','level','user','student','quiz','categories','courses','count','tutor','profession'));
             }
 
         }

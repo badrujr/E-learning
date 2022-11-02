@@ -53,6 +53,10 @@ Route::get('/more_about/{id}',[HomeController::class,'more_about']);
 
 Route::get('/admin/level/add-level',[LevelController::class,'addLevel']);
 Route::post('/upload_level',[LevelController::class,'saveLevel']);
+Route::get('/admin/level/manage-level',[LevelController::class,'manageLevel']);
+Route::get('/admin/level/edit-level/{id}',[LevelController::class,'editLevel']);
+Route::post('/editlevel_form/{id}',[LevelController::class,'update']);
+Route::get('/admin/delete-level/{id}',[LevelController::class,'delete']);
 
 Route::get('/admin/country/add-country',[CountryController::class,'addCountry']);
 Route::post('/upload_country',[CountryController::class,'saveCountry']);
@@ -65,6 +69,9 @@ Route::get('/admin/delete-country/{id}',[CountryController::class,'delete']);
 Route::get('/admin/category/add-category',[CourseCategoryController::class,'addCategory']);
 Route::post('/upload_category',[CourseCategoryController::class,'saveCategory']);
 Route::get('/admin/category/manage-category',[CourseCategoryController::class,'manageCategory']);
+Route::get('/admin/category/edit-category/{id}',[CourseCategoryController::class,'editCategory']);
+Route::post('/editcategory_form/{id}',[CourseCategoryController::class,'update']);
+Route::get('/admin/delete-category/{id}',[CourseCategoryController::class,'delete']);
 
 
 Route::get('/admin/about/add-about',[AboutUsController::class,'addAboutUs']);
@@ -75,11 +82,17 @@ Route::get('/admin/about/manage-about',[AboutUsController::class,'manageAboutUs'
 Route::get('/admin/profession/add-profession',[ProfessionController::class,'addProfession']);
 Route::post('/upload_profession',[ProfessionController::class,'saveProfession']);
 Route::get('/admin/profession/manage-profession',[ProfessionController::class,'manageProfession']);
+Route::get('/admin/profession/edit-profession/{id}',[ProfessionController::class,'editProfession']);
+Route::post('/editprofession_form/{id}',[ProfessionController::class,'update']);
+Route::get('/admin/delete-profession/{id}',[ProfessionController::class,'delete']);
 
 
 Route::get('/admin/tutor/add-tutor',[TutorController::class,'addTutor']);
 Route::post('/upload_tutor',[TutorController::class,'saveTutor']);
 Route::get('/admin/tutor/manage-tutor',[TutorController::class,'manageTutor']);
+Route::get('/admin/tutor/edit-tutor/{id}',[TutorController::class,'editTutor']);
+Route::post('/edittutor_form/{id}',[TutorController::class,'update']);
+Route::get('/admin/delete-tutor/{id}',[TutorController::class,'delete']);
 
 Route::get('/admin/tutorProfile/add-tutor-profile',[TutorProfileController::class,'addTutorProfile']);
 Route::post('/upload_tutor_profile',[TutorProfileController::class,'saveTutorProfile']);

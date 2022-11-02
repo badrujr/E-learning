@@ -4,7 +4,7 @@
    <meta charset="UTF-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>Manage categories</title>
+   <title>Manage level</title>
 
    <!-- font awesome cdn link  -->
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
@@ -74,7 +74,7 @@
 
 <section class="teachers">
 
-<h1 class="heading">our course category </h1>
+<h1 class="heading">our course level </h1>
 
 <form action="" method="post" class="search-tutor">
    <input type="text" name="search_box" placeholder="search level..." required maxlength="100">
@@ -90,22 +90,19 @@
         </div>
       @endif
 <div class="box-container">
-@forelse($categories as $category)
+   @forelse($levels as $level)
    <div class="box">
       <div class="tutor">
-         <img src="coursecategoryimage/{{$category->image}}" alt="">
          <div>
-            <h3>Course category: {{$category->name}}</h3>
-            <span>Course Level: {{$category->level->name}}</span>
+            <h3>Course Level: {{$level->name}}</h3>
          </div>
       </div>
-      <p>Description: {{$category->description}}</p>
-      <a href="{{url('admin/category/edit-category',$category->id)}}" class="inline-btn"><i class="fas fa-pencil" style="color:#ffffff !important;"></i> Edit</a>
-      <a href="{{url('admin/delete-category',$category->id)}}" onclick="return confirm('Are you sure you want to delete?')" class="inline-btn"><i class="fas fa-trash" style="color:red !important;"></i> Delete</a>
+      <a href="{{url('admin/level/edit-level',$level->id)}}" class="inline-btn"><i class="fas fa-pencil" style="color:#ffffff !important;"></i> Edit</a>
+      <a href="{{url('admin/delete-level',$level->id)}}" onclick="return confirm('Are you sure you want to delete?')" class="inline-btn"><i class="fas fa-trash" style="color:red !important;"></i> Delete</a>
    </div>
    @empty
 			<div class="box offer">
-            <p>No course category available</p>
+            <p>No course level available</p>
             </div>
             
 	@endforelse

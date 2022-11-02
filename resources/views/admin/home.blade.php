@@ -103,15 +103,15 @@
          <a href="{{url('admin/category/manage-category')}}" class="btn">view category</a>
       </div>
       <div class="box">
-         <h3>0</h3>
+         <h3>{{$profession}}</h3>
          <p>professionals</p>
          <a href="{{url('admin/profession/add-profession')}}" class="btn">add new profession</a>
          <a href="{{url('admin/profession/manage-profession')}}" class="btn">view profession</a>
       </div>
 
       <div class="box">
-         <h3>0</h3>
-         <p>tutor</p>
+         <h3>{{$tutor}}</h3>
+         <p>Tutor</p>
          <a href="{{url('admin/tutor/add-tutor')}}" class="btn">add new tutor</a>
          <a href="{{url('admin/tutor/manage-tutor')}}" class="btn">manage tutor</a>
       </div>

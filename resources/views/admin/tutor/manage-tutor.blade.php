@@ -79,7 +79,15 @@
       <input type="text" name="search_box" placeholder="search tutors..." required maxlength="100">
       <button type="submit" class="fas fa-search" name="search_tutor"></button>
    </form>
-  
+   @if(session()->has('message'))
+        <div class="alert alert-warning alert-has-icon" style="color:red; font-size:20px;">
+        {{session()->get('message')}}
+        </div>
+        @else
+        <div class="" style="color:red !important; font-size:20px;">
+        {{session()->get('message')}}
+        </div>
+      @endif
    <div class="box-container">
    <div class="box offer">
          <h3><i class="fas fa-chalkboard-user"></i> add new tutor</h3>
@@ -98,7 +106,7 @@
          <p>{{$tutorProfile->biography}}</p>
          <p>Email: {{$tutorProfile->tutor->email}}</p>
          <a href="{{url('admin/tutor/edit-tutor',$tutorProfile->id)}}" class="inline-btn">Edit</a>
-         <a href="{{url('admin/tutor/delete',$tutorProfile->id)}}" class="inline-btn">Delete</a>
+         <a href="{{url('admin/delete-tutor',$tutorProfile->id)}}" class="inline-btn">Delete</a>
       </div>
       @endforeach
    
