@@ -21,6 +21,7 @@ use App\Http\Controllers\TestimonialController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\UserController;
 
 use App\Http\Controllers\PDFController;
 
@@ -136,6 +137,13 @@ Route::get('/admin/student/manage-student',[studentController::class,'manageStud
 Route::get('/admin/edit-student/{id}',[studentController::class,'editStudent']);
 Route::post('/editstudent_form/{id}',[studentController::class,'update']);
 Route::get('/admin/delete-student/{id}',[studentController::class,'delete']);
+
+Route::get('/admin/users/add-user',[UserController::class,'addUser']);
+Route::post('/upload_user',[UserController::class,'saveUser']);
+Route::get('/admin/users/manage-user',[UserController::class,'manageUser']);
+Route::get('/admin/edit-user/{id}',[UserController::class,'editUser']);
+Route::post('/edituser_form/{id}',[UserController::class,'update']);
+Route::get('/admin/delete-user/{id}',[UserController::class,'delete']);
 
 
 Route::get('/showteam',[AdminController::class,'showteam']);

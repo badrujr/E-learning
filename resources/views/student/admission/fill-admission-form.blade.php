@@ -60,7 +60,7 @@
       @endif
    </form>
 @else
-<div class="box offer">
+<div class="box">
 <p style="font-size:20px; color:red;">You Alread make an admission on our system.</p>
 </div>
 

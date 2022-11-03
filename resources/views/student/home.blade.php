@@ -28,11 +28,11 @@
 
       <div class="box">
          <h3 class="title">likes and comments</h3>
-         <p class="likes">total likes : <span>25</span></p>
+         <p class="likes">total likes : <span>0</span></p>
          <a href="#" class="inline-btn">view likes</a>
          <p class="likes">total comments : <span>{{$count_comment}}</span></p>
          <a href="#" class="inline-btn">view comments</a>
-         <p class="likes">saved playlists : <span>4</span></p>
+         <p class="likes">saved playlists : <span>0</span></p>
          <a href="#" class="inline-btn">view playlists</a>
       </div>
 
