@@ -21,7 +21,7 @@
 @include('student.sidebar')
 
 <section class="form-container">
-
+@if(Auth::user()->student == null)
 <form action="{{url('upload_student')}}" method="post" enctype="multipart/form-data">
       @csrf
       <h3>fill the admission form</h3>
@@ -59,6 +59,13 @@
         </div>
       @endif
    </form>
+@else
+<div class="box offer">
+<p style="font-size:20px; color:red;">You Alread make an admission on our system.</p>
+</div>
+
+@endif
+
 </section>
 <!-- custom js file link  -->
 <script src="./assets/js/script.js"></script>

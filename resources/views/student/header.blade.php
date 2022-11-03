@@ -19,7 +19,12 @@
       </div>
 
       <div class="profile">
+         @if(Auth::user()->student == null)
+         <img src="./assets/images/admin.jpeg" class="image" alt="">
+         @else
          <img src="studentimage/{{Auth::user()->student->image}}" class="image" alt="">
+         @endif
+        
          
          <h3 class="name">{{Auth::user()->name}}</h3>
          <p class="role">{{Auth::user()->role}}</p>

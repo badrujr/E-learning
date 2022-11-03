@@ -62,11 +62,6 @@ class studentController extends Controller
         }
     
     }
-
-    public function checking(){
-        $checkStudents = Student::all();
-        return view('student.admission/fill-admission-form',compact('checkStudents'));
-    }
  
     public function showcourses(){
         $courses = Course::latest()->get();
@@ -103,6 +98,15 @@ class studentController extends Controller
 
     public function manageStudent(){
         $students = Student::latest()->get();
+        return view('admin.student/manage-student',compact('students'));
+    }
+    public function studentProfile($id){
+        $studentProfile = Student::find($id);
+        return view('admin.student/view-student',compact('studentProfile'));
+    }
+    public function searchStudent(Request $request){
+        $search_student = $request->search_student;
+        $students = Student::where('name','LIKE',"%{$search_student}%")->get(); 
         return view('admin.student/manage-student',compact('students'));
     }
     public function delete($id){

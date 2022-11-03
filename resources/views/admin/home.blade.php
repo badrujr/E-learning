@@ -78,7 +78,7 @@
 
    <div class="box-container">
    <div class="box">
-         <h3>{{$user}}</h3>
+         <h3>{{$student}}</h3>
          <p>Students</p>
          <a href="{{url('admin/student/add-student')}}" class="btn">add new student</a>
          <a href="{{url('admin/student/manage-student')}}" class="btn">view student</a>

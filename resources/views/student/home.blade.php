@@ -94,13 +94,17 @@
          </div>
          <h3 class="title">{{$course->courseCategory->name}}</h3>
          <p style="font-size:18px;">ksh {{number_format($course->price)}}/=</p>
+         @if(Auth::user()->student == null)
+        
+         @else
          <form action="{{url('upload_cart')}}" method="post" enctype="multipart/form-data">
             @csrf
-            <input type="hidden" value="{{Auth::user()->student->id}}" name="student_id"/>
+            <input type="hidden" value="{{Auth::user()->student->id}}" name="student_id"/>            
             <input type="hidden" value="{{$course->id}}" name="course_id"/>
             <input type="hidden" value="{{$course->price}}" name="price"/>
             <input type="submit" value="Add to cart" name="submit" class="inline-btn">
          </form>
+         @endif
          <a href="{{url('student/video/playlist',$course->id)}}" class="inline-btn">view playlist</a>
       </div>
       @empty

@@ -72,51 +72,57 @@
 
 @include('admin.sidebar')
 
-<section class="teachers">
+<section class="user-profile">
 
-<h1 class="heading">our students</h1>
+   <h1 class="heading">student profile</h1>
 
-<form action="{{url('search_student')}}" method="post" enctype="multipart/form-data"  class="search-tutor">
-   @csrf
-   <input type="text" name="search_student" placeholder="search student..." required maxlength="100">
-   <button type="submit" class="fas fa-search"></button>
-</form>
-@if(session()->has('message'))
-        <div class="alert alert-warning alert-has-icon" style="color:red; font-size:20px;">
-        {{session()->get('message')}}
-        </div>
-        @else
-        <div class="" style="color:red !important; font-size:20px;">
-        {{session()->get('message')}}
-        </div>
-      @endif
-<div class="box-container">
-   @forelse($students as $key=>$student)
-   <div class="box">
-      <div class="tutor">
-         <img src="studentimage/{{$student->image}}" alt="">
-         <div>
-            <h3>Name: {{$student->name}}</h3>
-            <span>Username: {{$student->user->email}}</span>
-         </div>
+   <div class="info">
+
+      <div class="user">
+         <img src="studentimage/{{$studentProfile->image}}" alt="">
+         <h3 class="name">{{$studentProfile->name}}</h3>
+         <p class="role">{{$studentProfile->user->role}}</p>
+         <p class="role">{{$studentProfile->country->name}}</p>
       </div>
-      <p>Country: {{$student->country->name}}</p>
-      <p>Age: {{\Carbon\Carbon::parse($student->dob)->diff(\Carbon\Carbon::now())->format('%y years, %m months and %d days');}}</p>
-      
-      <p>Gender: {{$student->gender->name}}</p>
-      <a href="{{url('admin/student/edit-student',$student->id)}}" class="inline-btn"><i class="fas fa-pencil" style="color:#ffffff !important;"></i> Edit</a>
-      <a href="{{url('admin/student/view-student',$student->id)}}" class="inline-btn"><i class="fas fa-eye" style="color:#ffffff !important;"></i> view</a>
-      <a href="{{url('admin/delete-student',$student->id)}}" onclick="return confirm('Are you sure you want to delete?')" class="inline-btn"><i class="fas fa-trash" style="color:red !important;"></i> Delete</a>
-   </div>
-   @empty
-			<div class="box offer">
-            <p>No student available</p>
+   
+      <div class="box-container">
+   
+         <div class="box">
+            <div class="flex">
+               <i class="fas fa-bookmark"></i>
+               <div>
+                  <span>0</span>
+                  <p>saved playlist</p>
+               </div>
             </div>
-            
-	@endforelse
+            <a href="#" class="inline-btn">view playlists</a>
+         </div>
+   
+         <div class="box">
+            <div class="flex">
+               <i class="fas fa-heart"></i>
+               <div>
+                  <span>0</span>
+                  <p>videos liked</p>
+               </div>
+            </div>
+            <a href="#" class="inline-btn">view liked</a>
+         </div>
+   
+         <div class="box">
+            <div class="flex">
+               <i class="fas fa-comment"></i>
+               <div>
+                  <span>0</span>
+                  <p>videos comments</p>
+               </div>
+            </div>
+            <a href="#" class="inline-btn">view comments</a>
+         </div>
+   
+      </div>
 
-
-</div>
+   </div>
 
 </section>
 <!-- custom js file link  -->
