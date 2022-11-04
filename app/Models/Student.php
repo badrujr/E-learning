@@ -40,4 +40,8 @@ class Student extends Model
     {
         return $this->belongsTo(Gender::class);
     }
+
+    public function bookmark(){
+        return $this->hasMany(Bookmark::class);
+    }
 }

@@ -22,6 +22,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\BookmarkController;
 
 use App\Http\Controllers\PDFController;
 
@@ -116,6 +117,8 @@ Route::get('/admin/video/manage-video',[VideoController::class,'manageVideo']);
 
 Route::post('/upload_comment',[CommentController::class,'saveComment']);
 Route::post('/add_like',[LikeController::class,'saveLike']);
+Route::post('/add_bookmark',[BookmarkController::class,'saveBookmark']);
+Route::get('/student/bookmark/view-video-bookmark',[BookmarkController::class,'viewBookmark']);
 
 Route::get('/admin/team/add-team',[TeamController::class,'addTeam']);
 Route::post('/upload_team',[TeamController::class,'saveTeam']);

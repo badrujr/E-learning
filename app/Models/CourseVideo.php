@@ -20,4 +20,8 @@ class CourseVideo extends Model
     public function comments(){
         return $this->hasMany(Comment::class);
     }
+
+    public function bookmark(){
+        return $this->hasMany(Bookmark::class);
+    }
 }

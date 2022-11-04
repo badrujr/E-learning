@@ -32,8 +32,8 @@
          <a href="#" class="inline-btn">view likes</a>
          <p class="likes">total comments : <span>{{$count_comment}}</span></p>
          <a href="#" class="inline-btn">view comments</a>
-         <p class="likes">saved playlists : <span>0</span></p>
-         <a href="#" class="inline-btn">view playlists</a>
+         <p class="likes">saved playlists : <span>{{$countbookmark}}</span></p>
+         <a href="{{url('student/bookmark/view-video-bookmark')}}" class="inline-btn">view playlists</a>
       </div>
 
       <div class="box">

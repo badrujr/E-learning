@@ -25,15 +25,17 @@
    <h1 class="heading">playlist details</h1>
 
    <div class="row">
-  
+ 
       <div class="column">
-         <form action="" method="post" class="save-playlist">
+      <form action="{{url('upload_bookmark')}}" method="post" enctype="multipart/form-data" class="save-playlist">
+            @csrf
+            <input type="hidden" value="{{Auth::user()->student->id}}" name="student_id"/>            
+            <input type="hidden" value="{{$course->id}}" name="course_video_id"/>
             <button type="submit"><i class="far fa-bookmark"></i> <span>save playlist</span></button>
          </form>
-   
          <div class="thumb">
             <img src="coursecategoryimage/{{$course->courseCategory->image}}" alt="">
-            <span>10 videos</span>
+            <span>0 videos</span>
          </div>
       </div>
       <div class="column">
@@ -65,6 +67,7 @@
    <div class="box-container">
 
    @forelse($course->courseVideo as $key=>$courseVideos)
+   
       <a class="box" href="{{url('student/video/watch-video',$courseVideos->id)}}">
          <i class="fas fa-play"></i>
          <img src="coursecategoryimage/{{$course->courseCategory->image}}" alt="">
@@ -73,9 +76,6 @@
       @empty
 			<p>No video available for now</p>
 	@endforelse
-
-     
-
    </div>
 
 </section>

@@ -19,6 +19,7 @@ use App\Models\Testimonial;
 use App\Models\Comment;
 use App\Models\Tutor;
 use App\Models\Profession;
+use App\Models\Bookmark;
 use DB;
 
 class HomeController extends Controller
@@ -31,10 +32,12 @@ class HomeController extends Controller
                 $students = Student::all()->count();
                 $courses = Course::latest()->get();
                 $count = CourseVideo::all()->count();
-                $comment = Comment::where('student_id','=',Auth::user()->id)->get();
+                $comment = Comment::where('student_id','=',Auth::user()->student->id)->get();
                 $count_comment = $comment->count();
                 $levels = Level::all();
-                return view('student.home',compact('categories','students','courses','count','count_comment','levels'));
+                $userIdBookmark = Bookmark::where('student_id','=',Auth::user()->student->id)->get();
+                $countbookmark = $userIdBookmark->count();
+                return view('student.home',compact('categories','students','courses','count','count_comment','levels','countbookmark'));
             }
           
             else{

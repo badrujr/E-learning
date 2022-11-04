@@ -29,12 +29,18 @@
       <div class="info">
          <p class="date"><i class="fas fa-calendar"></i><span>{{$courseVideo->course->created_at}}</span></p>
          <p class="date"><i class="fas fa-heart"></i><span>0 likes</span></p>
+         <form action="{{url('add_bookmark')}}" method="post" enctype="multipart/form-data" class="flex">
+      @csrf
+      <input type="hidden" value="{{Auth::user()->student->id}}" name="student_id"/>            
+      <input type="hidden" value="{{$courseVideo->id}}" name="course_video_id"/>
+      <button type="submit"><i class="far fa-bookmark"></i> <span>save playlist</span></button>
+      </form>
       </div>
       <div class="tutor">
          <img src="tutorimage/{{$courseVideo->course->tutor->image}}" alt="">
          <div>
             <h3>course category: {{$courseVideo->course->courseCategory->name}}</h3>
-            <span>{{$courseVideo->course->tutor->name}}</span>
+            <span>Tutor: {{$courseVideo->course->tutor->name}}</span>
         
          </div>
       </div>
@@ -46,6 +52,7 @@
          <input type="hidden" value="{{$courseVideo->course->tutor->id}}" class="inline-btn" name="tutor_id">
          <button type="submit"><i class="far fa-heart"></i><span>like</span></button>
       </form>
+    
       <p class="description">
         {{$courseVideo->course->content}}
       </p>
