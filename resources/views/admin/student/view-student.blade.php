@@ -39,7 +39,7 @@
             <div class="flex">
                <i class="fas fa-bookmark"></i>
                <div>
-                  <span>0</span>
+                  <span>{{$countBookmark}}</span>
                   <p>saved playlist</p>
                </div>
             </div>

@@ -15,6 +15,7 @@ use App\Models\TutorProfile;
 use App\Models\CourseCategory;
 use App\Models\CourseVideo;
 use App\Models\Quiz;
+use App\Models\Bookmark;
 use DB;
 
 
@@ -102,7 +103,8 @@ class studentController extends Controller
     }
     public function studentProfile($id){
         $studentProfile = Student::find($id);
-        return view('admin.student/view-student',compact('studentProfile'));
+        $countBookmark = Bookmark::where('student_id','=',$studentProfile)->count();
+        return view('admin.student/view-student',compact('studentProfile','countBookmark'));
     }
     public function searchStudent(Request $request){
         $search_student = $request->search_student;
