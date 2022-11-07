@@ -223,7 +223,7 @@ button{
         </div>
         <div class="amount-to-pay">
           <p>Amout to Pay:</p>
-          <p>KES <span class="currency">60,000</span></p>
+          <p>KES <span class="currency">{{number_format($cart->price)}}</span></p>
         </div>
       </div>
       <div>
@@ -274,8 +274,13 @@ button{
               <div id="tab1" class="tabcontent">
                 <div class="payment-input">
                   <div class="col-1">
-                    <input type="text" placeholder="Mobile Number" />
+                    <form method="post" action="{{url('pay_mpesa')}}">
+                    @csrf
+                    <input type="text" placeholder="Mobile Number" name="phonenumber" />
+                    <input type="hidden" placeholder="Mobile Number" name="amount" value="{{number_format($cart->price)}}" readonly />
+                  
                     <button>pay now</button>
+                    </form>
                   </div>
                 </div>
               </div>
@@ -285,6 +290,7 @@ button{
                 <div class="payment-input">
                   <div class="col-1">
                     <input type="text" placeholder="Mobile Number" />
+                    <input type="hidden" placeholder="Mobile Number" name="amount" value="{{number_format($cart->price)}}" readonly />
                     <button>pay now</button>
                   </div>
                 </div>
@@ -297,6 +303,15 @@ button{
         <!-- accordian ends -->
       </div>
     </div>
+    @if(session()->has('message'))
+      <div style="text-align:center;" class="alert alert-success alert-has-icon" style="color:green; font-size:20px;">
+      {{session()->get('message')}}
+      </div>
+      @else
+      <div class="alert alert-warning alert-has-icon" style="color:red !important; font-size:20px; text-align:center;">
+      {{session()->get('message')}}
+      </div>
+     @endif
     <!-- button starts -->
     <div class="payment-button">
       <button><a href="{{url('student/cart/cart')}}" style="color:#ffffff;">Back to Cart</a></button>

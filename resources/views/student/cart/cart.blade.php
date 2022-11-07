@@ -171,7 +171,7 @@ $total = CartController::cartItem();
           <p>KES<span>{{number_format($sum)}}</span></p>
         </div>
         <div class="checkout">
-          <a href="{{url('student/payment/payment')}}">Checkout</a>
+          <a href="{{url('student/payment/payment',$cart->id)}}">Checkout</a>
         </div>
       </div>
       @empty

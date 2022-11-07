@@ -197,6 +197,7 @@ return [
         App\Providers\FortifyServiceProvider::class,
         App\Providers\JetstreamServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
+        \Safaricom\Mpesa\MpesaServiceProvider::class
 
     ],
 
@@ -214,6 +215,7 @@ return [
     'aliases' => Facade::defaultAliases()->merge([
         // 'ExampleClass' => App\Example\ExampleClass::class,
         'PDF' => Barryvdh\DomPDF\Facade::class,
+        'Mpesa'=> \Safaricom\Mpesa\MpesaServiceProvider::class
     ])->toArray(),
 
 ];

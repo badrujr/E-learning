@@ -23,6 +23,7 @@ use App\Http\Controllers\LikeController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\BookmarkController;
+use App\Http\Controllers\MpesaController;
 
 use App\Http\Controllers\PDFController;
 
@@ -185,7 +186,8 @@ Route::get('/admin/student/view-student/{id}',[studentController::class,'student
 
 Route::get('/student/cart/cart',[CartController::class,'cart']);
 Route::post('/upload_cart',[CartController::class,'saveCart']);
-Route::get('/student/payment/payment',[PaymentController::class,'createPayment']);
+Route::get('/student/payment/payment/{id}',[PaymentController::class,'createPayment']);
+Route::post('/pay_mpesa',[MpesaController::class,'stkSimulation']);
 Route::get('/student/delete-cart/{id}',[CartController::class,'deleteCartItem']);
 
 Route::get('/student/testimonial/add-testimonial',[TestimonialController::class,'addTestimonial']);
