@@ -19,4 +19,7 @@ class Comment extends Model
     public function student(){
         return $this->belongsTo(Student::class);
     }
+    public function tutor(){
+        return $this->belongsTo(Tutor::class);
+    }
 }

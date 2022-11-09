@@ -60,7 +60,6 @@
       <div class="box">
          <h3>{{$tutor}}</h3>
          <p>Tutor</p>
-         <a href="{{url('admin/tutor/add-tutor')}}" class="btn">add new tutor</a>
          <a href="{{url('admin/tutor/manage-tutor')}}" class="btn">manage tutor</a>
       </div>
       <div class="box">
@@ -93,9 +92,9 @@
          <a href="add_content.php" class="btn">view bookmarks</a>
       </div>
       <div class="box">
-         <h3>0</h3>
+         <h3>{{$comments}}</h3>
          <p>total comments</p>
-         <a href="comments.php" class="btn">view comments</a>
+         <a href="{{url('admin/comment/video-comment')}}" class="btn">view comments</a>
       </div>
 
    </div>

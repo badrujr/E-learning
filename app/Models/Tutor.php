@@ -22,4 +22,7 @@ class Tutor extends Model
     public function tutorProfile(){
         return $this->hasMany(TutorProfile::class);
     }
+    public function comment(){
+        return $this->hasMany(Comment::class);
+    }
 }

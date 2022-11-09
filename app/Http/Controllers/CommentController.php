@@ -38,4 +38,8 @@ class CommentController extends Controller
         $courseVideo = CourseVideo::latest()->get();
         return view('student.video/watch-video',compact('courseVideo'));
     }
+    public function viewVideoComment(){
+        $comments = Comment::latest()->get();
+        return view('admin.comment/video-comment',compact('comments'));
+    }
 }

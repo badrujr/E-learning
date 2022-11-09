@@ -115,6 +115,7 @@ Route::get('/admin/quiz/manage-quiz',[QuizController::class,'manageQuiz']);
 Route::get('/admin/video/add-video',[VideoController::class,'addVideo']);
 Route::post('/upload_video',[VideoController::class,'saveVideo']);
 Route::get('/admin/video/manage-video',[VideoController::class,'manageVideo']);
+Route::get('/admin/comment/video-comment',[CommentController::class,'viewVideoComment']);
 
 Route::post('/upload_comment',[CommentController::class,'saveComment']);
 Route::post('/add_like',[LikeController::class,'saveLike']);

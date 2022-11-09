@@ -32,10 +32,19 @@ class HomeController extends Controller
                 $students = Student::all()->count();
                 $courses = Course::latest()->get();
                 $count = CourseVideo::all()->count();
-                $comment = Comment::where('student_id','=',Auth::user()->student->id)->get();
+
+                $comment = Comment::where('student_id', '=', Auth::user()->student->id)
+                                     ->orWhere(function($query) {
+                                    $query->where('student_id', Auth::user()->student->id)
+                                    ->where('student_id', '=', null);
+                                     })
+                                    ->get();
                 $count_comment = $comment->count();
+
                 $levels = Level::all();
-                $userIdBookmark = Bookmark::where('student_id','=',Auth::user()->student->id)->get();
+                $userIdBookmark = Bookmark::where('student_id','=',Auth::user()->student->id)
+                            ->orWhere('student_id','=',null)
+                            ->get();
                 $countbookmark = $userIdBookmark->count();
                 return view('student.home',compact('categories','students','courses','count','count_comment','levels','countbookmark'));
             }
@@ -51,7 +60,8 @@ class HomeController extends Controller
                 $courses = Course::latest()->get();
                 $tutor = Tutor::all()->count();
                 $profession = Profession::all()->count();
-                return view('admin.home',compact('country','level','user','student','quiz','categories','courses','count','tutor','profession'));
+                $comments = Comment::all()->count();
+                return view('admin.home',compact('country','level','user','student','quiz','categories','courses','count','tutor','profession','comments'));
             }
 
         }
