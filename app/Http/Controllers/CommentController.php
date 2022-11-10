@@ -42,4 +42,19 @@ class CommentController extends Controller
         $comments = Comment::latest()->get();
         return view('admin.comment/video-comment',compact('comments'));
     }
+    public function delete($id){
+        $delete = Comment::find($id);
+        if(!$delete){
+            return back()->with('message','comment details is not available'); 
+        }
+        try{
+            
+            $delete->delete();
+            return back()->with('message','comment removed succesfully'); 
+
+        }catch(\Exception $e){
+            return back()->with('message','You can not delete this course due to the relationship'); 
+        }
+
+    }
 }

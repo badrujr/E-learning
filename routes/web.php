@@ -105,6 +105,9 @@ Route::get('/admin/tutorProfile/manage-tutor-profile',[TutorProfileController::c
 Route::get('/admin/course/add-course',[CourseController::class,'addCourse']);
 Route::post('/upload_course',[CourseController::class,'saveCourse']);
 Route::get('/admin/course/manage-course',[CourseController::class,'manageCourse']);
+Route::get('/admin/course/edit-course/{id}',[CourseController::class,'editCourse']);
+Route::post('/editcourse_form/{id}',[CourseController::class,'update']);
+Route::get('/admin/delete-course/{id}',[CourseController::class,'delete']);
 
 
 Route::get('/admin/quiz/add-quiz',[QuizController::class,'addQuiz']);
@@ -115,7 +118,11 @@ Route::get('/admin/quiz/manage-quiz',[QuizController::class,'manageQuiz']);
 Route::get('/admin/video/add-video',[VideoController::class,'addVideo']);
 Route::post('/upload_video',[VideoController::class,'saveVideo']);
 Route::get('/admin/video/manage-video',[VideoController::class,'manageVideo']);
+Route::get('/admin/video/edit-video/{id}',[VideoController::class,'editVideo']);
+Route::post('/editvideo_form/{id}',[VideoController::class,'update']);
+Route::get('/admin/delete-video/{id}',[VideoController::class,'delete']);
 Route::get('/admin/comment/video-comment',[CommentController::class,'viewVideoComment']);
+Route::get('/admin/delete-comment/{id}',[CommentController::class,'delete']);
 
 Route::post('/upload_comment',[CommentController::class,'saveComment']);
 Route::post('/add_like',[LikeController::class,'saveLike']);

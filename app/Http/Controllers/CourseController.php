@@ -49,4 +49,52 @@ class CourseController extends Controller
         $courses = Course::latest()->get();
         return view('admin.course/manage-course',compact('courses'));
     }
+    public function editCourse($id){
+        $edit_course = Course::find($id);
+        $tutors = Tutor::all();
+        $categories = CourseCategory::all();
+        return view('admin.course/edit-course',compact('edit_course','tutors','categories'));
+    }
+    public function update(Request $request,$id){
+        $editcourse = Course::find($id);
+
+        $editcourse->course_category_id=$request->course_category_id;
+
+        $editcourse->name=$request->name;
+
+        $editcourse->content=$request->content;
+
+        $editcourse->price=$request->price;
+
+        $editcourse->tutor_id=$request->tutor_id;
+
+        if(!$editcourse){
+            return back()->with('message','course details is not available'); 
+        }
+        try{
+            
+            $editcourse->save();
+            return back()->with('message','course updated succesfully'); 
+
+
+        }catch(\Exception $e){
+            return back()->with('message','An error occured'); 
+
+        }
+    }
+    public function delete($id){
+        $delete = Course::find($id);
+        if(!$delete){
+            return back()->with('message','course details is not available'); 
+        }
+        try{
+            
+            $delete->delete();
+            return back()->with('message','course deleted succesfully'); 
+
+        }catch(\Exception $e){
+            return back()->with('message','You can not delete this course due to the relationship'); 
+        }
+
+    }
 }
