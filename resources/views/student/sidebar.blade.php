@@ -6,8 +6,8 @@
 
    <div class="profile">
       <img src="./assets/images/logo-minaa.jpg" class="image" alt="">
-      <h3 class="name">E-Learning</h3>
-      <p class="role">Management system</p>
+      <h3 class="name">Online</h3>
+      <p class="role">Baking Classes</p>
       
    </div>
 
