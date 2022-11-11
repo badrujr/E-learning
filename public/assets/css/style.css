@@ -1238,6 +1238,51 @@ section{
    align-items: center;
    justify-content: center;
 }
+.form-container-signin{
+   min-height: calc(100vh - 20rem);
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   /* border:1px solid red; */
+   padding-right: 250px;
+   padding-bottom: 2px;
+}
+
+.form-container-signin form{
+   background-color: var(--white);
+   border-radius: .5rem;
+   padding: 2rem;
+   width: 50rem;
+}
+.form-container-signin form h3{
+   font-size: 2.5rem;
+   text-transform: capitalize;
+   color: var(--black);
+   text-align: center;
+}
+
+.form-container-signin form p{
+   font-size: 1.7rem;
+   color: var(--light-color);
+   padding-top: 1rem;
+}
+
+.form-container-signin form p span{
+   color: var(--red);
+}
+
+.form-container-signin form .box{
+   font-size: 1.8rem;
+   color: var(--black);
+   border-radius: .5rem;
+   padding: 1.4rem;
+   background-color: var(--light-bg);
+   width: 100%;
+   margin: 1rem 0;
+}
+
+
+
 
 .form-container form{
    background-color: var(--white);
@@ -1351,6 +1396,12 @@ section{
 
    .header .flex .search-form.active{
       clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+   }
+
+   .form-container-signin .flex{
+      display: flex;
+      gap: 0;
+      flex-flow: column;
    }
 
 }
