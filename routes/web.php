@@ -149,6 +149,12 @@ Route::get('/admin/student/manage-student',[studentController::class,'manageStud
 Route::get('/admin/edit-student/{id}',[studentController::class,'editStudent']);
 Route::post('/editstudent_form/{id}',[studentController::class,'update']);
 Route::get('/admin/delete-student/{id}',[studentController::class,'delete']);
+Route::get('/admin/student/trash-student-list',[studentController::class,'trash']);
+Route::get('/admin/restore-student/{id}',[studentController::class,'restore']);
+Route::get('/admin/permanent-delete-student/{id}',[studentController::class,'deleteStudentPermanent']);
+Route::post('/student_pdf',[studentController::class,'viewPdf']);
+
+
 
 Route::get('/admin/users/add-user',[UserController::class,'addUser']);
 Route::post('/upload_user',[UserController::class,'saveUser']);

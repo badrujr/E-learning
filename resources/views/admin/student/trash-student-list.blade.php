@@ -22,7 +22,7 @@
 
 <section class="teachers">
 
-<h1 class="heading">our students</h1>
+<h1 class="heading">Students Recycle Bin</h1>
 
 <form action="{{url('search_student')}}" method="post" enctype="multipart/form-data"  class="search-tutor">
    @csrf
@@ -30,7 +30,7 @@
    <button type="submit" class="fas fa-search"></button>
 </form>
 @if(session()->has('message'))
-        <div class="alert alert-warning alert-has-icon" style="color:red; font-size:20px;">
+        <div class="alert alert-success alert-has-icon" style="color:green; font-size:20px;">
         {{session()->get('message')}}
         </div>
         @else
@@ -39,16 +39,6 @@
         </div>
       @endif
 <div class="box-container">
-<div class="box offer">
-      <h3>Recycle Bin</h3>
-      <p>Minat Cake Zone Academy is a baking school knowledge market place for bakers and beginners in baking. We provide a platform for experienced bakers to perfect their skills, learn different techniques, recipes "secret flavour & tips" through advanced baking</p>
-      <a href="{{url('admin/student/trash-student-list')}}" class="inline-btn">Trash data</a>
-      <form action="{{url('student_pdf')}}" method="post" enctype="multipart/form-data" target="_blank">
-         @csrf
-      <button type="submit" class="fas fa-search"></button>
-      </form>
-     
-   </div>
    @forelse($students as $key=>$student)
    <div class="box">
       <div class="tutor">
@@ -63,13 +53,12 @@
       
       <p>Gender: {{$student->gender->name}}</p>
       <p>Created at: {{date('F j,Y', strtotime($student->created_at))}}</p>
-      <a href="{{url('admin/student/edit-student',$student->id)}}" class="inline-btn"><i class="fas fa-pencil" style="color:#ffffff !important;"></i> Edit</a>
-      <a href="{{url('admin/student/view-student',$student->id)}}" class="inline-btn"><i class="fas fa-eye" style="color:#ffffff !important;"></i> view</a>
-      <a href="{{url('admin/delete-student',$student->id)}}" onclick="return confirm('Are you sure you want to delete?')" class="inline-btn"><i class="fas fa-trash" style="color:red !important;"></i> Delete</a>
+      <a href="{{url('admin/restore-student',$student->id)}}" class="inline-btn"><i class="fas fa-refresh" style="color:#ffffff !important;"></i> Restore</a>
+      <a href="{{url('admin/permanent-delete-student',$student->id)}}" onclick="return confirm('Are you sure you want to delete?')" class="inline-btn"><i class="fas fa-trash" style="color:red !important;"></i> Delete</a>
    </div>
    @empty
 			<div class="box offer">
-            <p>No student available</p>
+            <p>Your trash is empty</p>
             </div>
             
 	@endforelse

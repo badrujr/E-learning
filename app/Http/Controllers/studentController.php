@@ -17,6 +17,7 @@ use App\Models\CourseVideo;
 use App\Models\Quiz;
 use App\Models\Bookmark;
 use DB;
+use PDF;
 
 
 class studentController extends Controller
@@ -127,6 +128,28 @@ class studentController extends Controller
 
         }
 
+    }
+
+    public function trash(){
+        $students = Student::onlyTrashed()->get();
+        return view('admin.student/trash-student-list',compact('students'));
+    }
+
+    public function restore($id){
+        $student = Student::where('id','=', $id)->restore();
+        return back()->with('message','student details have been restored successfuly'); 
+    }
+
+    public function deleteStudentPermanent($id){
+        $student = Student::where('id', $id);
+        $deletePermanent->forceDelete();
+        return back()->with('message','student details have been permanent removed successfuly'); 
+    }
+
+    public function viewPdf(){
+        $students = Student::all();
+        $pdf = PDF::loadView('admin.pdf/studentdetails', array('students' => $students));
+        return $pdf->stream();
     }
  
 }
