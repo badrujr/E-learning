@@ -197,7 +197,8 @@ return [
         App\Providers\FortifyServiceProvider::class,
         App\Providers\JetstreamServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
-        \Safaricom\Mpesa\MpesaServiceProvider::class
+        \Safaricom\Mpesa\MpesaServiceProvider::class,
+        Spatie\Permission\PermissionServiceProvider::class
 
     ],
 

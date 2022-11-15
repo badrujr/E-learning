@@ -41,6 +41,7 @@
       <h3>add new user</h3>
       <p>Minat Cake Zone Academy is a baking school knowledge market place for bakers and beginners in baking. We provide a platform for experienced bakers to perfect their skills.</p>
       <a href="{{url('admin/users/add-user')}}" class="inline-btn">add new user</a>
+      <a href="{{url('admin/roles/manage-role')}}" class="inline-btn">add role and permission</a>
    </div>
    @forelse($users as $user)
    <div class="box">
