@@ -45,7 +45,7 @@
       <a href="{{url('admin/student/trash-student-list')}}" class="inline-btn">Trash data</a>
       <form action="{{url('student_pdf')}}" method="post" enctype="multipart/form-data" target="_blank">
          @csrf
-      <button type="submit" class="fas fa-search"></button>
+      <button type="submit" class="fas fa-book"></button>
       </form>
      
    </div>
