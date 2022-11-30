@@ -34,13 +34,6 @@ class HomeController extends Controller
                 $courses = Course::latest()->get();
                 $count = CourseVideo::all()->count();
 
-                $comment = Comment::where('student_id', '=', Auth::user()->student->id)
-                                     ->orWhere(function($query) {
-                                    $query->where('student_id', Auth::user()->student->id)
-                                    ->where('student_id', '=', null);
-                                     })
-                                    ->get();
-                $count_comment = $comment->count();
 
                 $levels = Level::all();
                 $userIdBookmark = Bookmark::where('student_id','=',Auth::user()->student->id)
@@ -50,7 +43,7 @@ class HomeController extends Controller
               
 
                 $payment = DB::table('payments')->where('payment_status','approved')->where('student_id','=',Auth::user()->student->id)->first();
-                return view('student.home',compact('categories','students','courses','count','count_comment','levels','countbookmark','payment'));
+                return view('student.home',compact('categories','students','courses','count','levels','countbookmark','payment'));
             }
           
             else{

@@ -22,7 +22,7 @@
 
 <section class="teachers">
 
-<h1 class="heading">Payment Records: Total Amount {{$sum}}</h1>
+<h1 class="heading">Payment Records: Total Amount USD: {{number_format($sum)}}</h1>
 
 <form action="" method="post" enctype="multipart/form-data"  class="search-tutor">
    @csrf

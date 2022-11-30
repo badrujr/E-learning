@@ -30,15 +30,7 @@
          <h3 class="title">likes and comments</h3>
          <p class="likes">total likes : <span>0</span></p>
          <a href="#" class="inline-btn">view likes</a>
-         <p class="likes">total comments : 
-            <span>
-               @if($count_comment == null)
-               0
-               @else
-               {{$count_comment}}
-               @endif
-            </span>
-         </p>
+        
          <a href="#" class="inline-btn">view comments</a>
          <p class="likes">saved playlists : 
             <span>

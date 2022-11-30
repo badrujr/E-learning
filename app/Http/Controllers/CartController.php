@@ -13,7 +13,7 @@ use Session;
 class CartController extends Controller
 {
     public function cart(){
-        $carts = Cart::where('student_id','=',Auth::user()->id)->get();
+        $carts = Cart::where('student_id','=',Auth::user()->student->id)->get();
         $sum = Cart::sum('price');
         return view('student.cart/cart',compact('carts','sum'));
     }
@@ -39,7 +39,8 @@ class CartController extends Controller
         try{
             
           $cart->save();
-          return back()->with('message','cart added succesfully'); 
+          Session::flash('success','Cart is successfully added');
+          return redirect()->route('student.cart/cart');
 
 
         }catch(\Exception $e){
