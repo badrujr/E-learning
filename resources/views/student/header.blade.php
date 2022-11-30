@@ -19,7 +19,9 @@
       </div>
 
       <div class="profile">
-         @if(Auth::user()->student == null)
+         @if(is_null(Auth::user()->student))
+         <img src="./assets/images/admin.jpeg" class="image" alt="">
+         @elseif(Auth::user()->student == '')
          <img src="./assets/images/admin.jpeg" class="image" alt="">
          @else
          <img src="studentimage/{{Auth::user()->student->image}}" class="image" alt="">

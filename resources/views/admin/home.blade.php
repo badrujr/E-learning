@@ -28,20 +28,20 @@
    <div class="box">
          <h3>{{$student}}</h3>
          <p>Students</p>
-         <a href="{{url('admin/student/add-student')}}" class="btn">add new student</a>
-         <a href="{{url('admin/student/manage-student')}}" class="btn">view student</a>
+         <a href="{{url('students/create')}}" class="btn">add new student</a>
+         <a href="{{url('students/')}}" class="btn">view student</a>
       </div>
       <div class="box">
          <h3>{{$country}}</h3>
          <p>total countries</p>
-         <a href="{{url('admin/country/add-country')}}" class="btn">add new country</a>
-         <a href="{{url('admin/country/manage-country')}}" class="btn">view country</a>
+         <a href="{{url('countries/create')}}" class="btn">add new country</a>
+         <a href="{{url('countries/')}}" class="btn">view country</a>
       </div>
       <div class="box">
          <h3>{{$level}}</h3>
          <p>total levels</p>
-         <a href="{{url('admin/level/add-level')}}" class="btn">add new level</a>
-         <a href="{{url('admin/level/manage-level')}}" class="btn">view level</a>
+         <a href="{{url('levels/create')}}" class="btn">add new level</a>
+         <a href="{{url('levels/')}}" class="btn">view level</a>
       </div>
 
       <div class="box">

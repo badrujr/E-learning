@@ -45,8 +45,12 @@
             <h3>Course Level: {{$level->name}}</h3>
          </div>
       </div>
-      <a href="{{url('admin/level/edit-level',$level->id)}}" class="inline-btn"><i class="fas fa-pencil" style="color:#ffffff !important;"></i> Edit</a>
-      <a href="{{url('admin/delete-level',$level->id)}}" onclick="return confirm('Are you sure you want to delete?')" class="inline-btn"><i class="fas fa-trash" style="color:red !important;"></i> Delete</a>
+      <a href="{{route('levels.edit',$level->id)}}" class="inline-btn"><i class="fas fa-pencil" style="color:#ffffff !important;"></i> Edit</a>
+      <form action="{{ route('levels.destroy', $level->id)}}" method="post">
+                  @csrf
+                  @method('DELETE')
+                  <button class="inline-btn" type="submit">Delete</button>
+      </form>
    </div>
    @empty
 			<div class="box offer">

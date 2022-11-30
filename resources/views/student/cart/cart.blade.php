@@ -156,7 +156,7 @@ $total = CartController::cartItem();
         <div class="cart-details">
           <div class="course">
             <p>category: {{$cart->course->courseCategory->name}}</p>
-            <p>Ksh {{number_format($cart->price)}}</p>
+            <p>USD {{number_format($cart->price)}}</p>
           </div>
           <p class="subtitle"></p>
           <div class="course">
@@ -168,7 +168,7 @@ $total = CartController::cartItem();
       <div class="cart cart-footer">
         <div class="cart-amount">
           <p>Subtotal</p>
-          <p>KES<span>{{number_format($sum)}}</span></p>
+          <p>USD<span> {{number_format($sum)}}</span></p>
         </div>
         <div class="checkout">
           <a href="{{url('student/payment/payment',$cart->id)}}">Checkout</a>

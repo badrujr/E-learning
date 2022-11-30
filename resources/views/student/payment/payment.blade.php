@@ -223,7 +223,7 @@ button{
         </div>
         <div class="amount-to-pay">
           <p>Amout to Pay:</p>
-          <p>KES <span class="currency">{{number_format($cart->price)}}</span></p>
+          <p>USD <span class="currency">{{number_format($cart->price)}}</span></p>
         </div>
       </div>
       <div>
@@ -269,6 +269,9 @@ button{
                 <button class="tablinks" onclick="openCity(event, 'tab2')">
                   <img src="./assets/images/tigopesa.png" alt="tigopesa" />
                 </button>
+                <button class="tablinks" onclick="openCity(event, 'tab3')">
+                  <img src="./assets/images/paypal-logo.png" alt="paypal" />
+                </button>
               </div>
               <!-- tabs contents starts -->
               <div id="tab1" class="tabcontent">
@@ -292,6 +295,20 @@ button{
                     <input type="text" placeholder="Mobile Number" />
                     <input type="hidden" placeholder="Mobile Number" name="amount" value="{{number_format($cart->price)}}" readonly />
                     <button>pay now</button>
+                  </div>
+                </div>
+              </div>
+              <!-- tabs contents ends -->
+               <!-- tabs contents starts -->
+               <div id="tab3" class="tabcontent">
+                <div class="payment-input">
+                  <div class="col-1">
+                    <form action="{{route('payment')}}" method="post">
+                      @csrf
+                      <input type="hidden" name="amount" value="{{$cart->price}}" />
+                      <input type="hidden" name="student_id" value="{{$cart->student->id}}" />
+                    <button>pay with paypal</button>
+                    </form>
                   </div>
                 </div>
               </div>

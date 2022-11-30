@@ -110,10 +110,8 @@
             <span>{{$count}} videos</span>
          </div>
          <h3 class="title">{{$course->courseCategory->name}}</h3>
-         <p style="font-size:18px;">ksh {{number_format($course->price)}}/=</p>
-         @if(Auth::user()->student == null)
-        
-         @else
+         <p style="font-size:18px;">USD {{number_format($course->price)}}/=</p>
+         @if(is_null($payment))
          <form action="{{url('upload_cart')}}" method="post" enctype="multipart/form-data">
             @csrf
             <input type="hidden" value="{{Auth::user()->student->id}}" name="student_id"/>            
@@ -121,8 +119,17 @@
             <input type="hidden" value="{{$course->price}}" name="price"/>
             <input type="submit" value="Add to cart" name="submit" class="inline-btn">
          </form>
-         @endif
+        @elseif($payment == '')
+        <form action="{{url('upload_cart')}}" method="post" enctype="multipart/form-data">
+            @csrf
+            <input type="hidden" value="{{Auth::user()->student->id}}" name="student_id"/>            
+            <input type="hidden" value="{{$course->id}}" name="course_id"/>
+            <input type="hidden" value="{{$course->price}}" name="price"/>
+            <input type="submit" value="Add to cart" name="submit" class="inline-btn">
+         </form>
+         @else
          <a href="{{url('student/video/playlist',$course->id)}}" class="inline-btn">view playlist</a>
+         @endif
       </div>
       @empty
       <div class="box container">

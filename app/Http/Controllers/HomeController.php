@@ -20,6 +20,7 @@ use App\Models\Comment;
 use App\Models\Tutor;
 use App\Models\Profession;
 use App\Models\Bookmark;
+use App\Models\Payment;
 use DB;
 
 class HomeController extends Controller
@@ -46,7 +47,10 @@ class HomeController extends Controller
                             ->orWhere('student_id','=',null)
                             ->get();
                 $countbookmark = $userIdBookmark->count();
-                return view('student.home',compact('categories','students','courses','count','count_comment','levels','countbookmark'));
+              
+
+                $payment = DB::table('payments')->where('payment_status','approved')->where('student_id','=',Auth::user()->student->id)->first();
+                return view('student.home',compact('categories','students','courses','count','count_comment','levels','countbookmark','payment'));
             }
           
             else{

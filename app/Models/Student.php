@@ -31,6 +31,9 @@ class Student extends Model
     public function carts(){
         return $this->hasMany(Cart::class);
     }
+    public function payments(){
+        return $this->hasMany(Payment::class);
+    }
     public function testimonials(){
         return $this->hasMany(Testimonial::class);
     }

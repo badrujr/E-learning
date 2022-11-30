@@ -18,7 +18,7 @@
       <a href="{{url('/admin/about/add-about')}}"><i class="fas fa-shop"></i><span>About us</span></a>
       <a href="{{url('admin/blog/manage-blog-info')}}"><i class="fas fa-spinner"></i><span>Blog</span></a>
       <a href="{{url('admin/testimonial/manage-testimonial')}}"><i class="fas fa-comment"></i><span>Testimonial</span></a>
-      <a href="{{url('admin/payment/manage-payment')}}"><i class="fas fa-shopping-cart"></i><span>Payment</span></a>
+      <a href="{{url('payments/')}}"><i class="fas fa-shopping-cart"></i><span>Payment</span></a>
       <a href="{{url('admin/payment/add-invoice')}}"><i class="fas fa-payment"></i><span>Invoice</span></a>
    </nav>
 

@@ -63,8 +63,8 @@
       
       <p>Gender: {{$student->gender->name}}</p>
       <p>Created at: {{date('F j,Y', strtotime($student->created_at))}}</p>
-      <a href="{{url('admin/student/edit-student',$student->id)}}" class="inline-btn"><i class="fas fa-pencil" style="color:#ffffff !important;"></i> Edit</a>
-      <a href="{{url('admin/student/view-student',$student->id)}}" class="inline-btn"><i class="fas fa-eye" style="color:#ffffff !important;"></i> view</a>
+      <a href="{{url('students/edit',$student->id)}}" class="inline-btn"><i class="fas fa-pencil" style="color:#ffffff !important;"></i> Edit</a>
+      <a href="{{url('students/view_student',$student->id)}}" class="inline-btn"><i class="fas fa-eye" style="color:#ffffff !important;"></i> view</a>
       <a href="{{url('admin/delete-student',$student->id)}}" onclick="return confirm('Are you sure you want to delete?')" class="inline-btn"><i class="fas fa-trash" style="color:red !important;"></i> Delete</a>
    </div>
    @empty

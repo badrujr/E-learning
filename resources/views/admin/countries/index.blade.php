@@ -47,8 +47,12 @@
                 <td>{{$country->created_at}}</td>
                 <td>{{$country->updated_at}}</td>
                 <td>
-                    <button><a href = "{{url('admin/country/edit-country',$country->id)}}"><i class="fas fa-pencil" style="color:#ffffff !important;"></i></a></button>
-                    <button><a href = "{{url('admin/delete-country',$country->id)}}" onclick="return confirm('Are you sure you want to delete?')"><i class="fas fa-trash" style="color:red !important;"></i></a></button>
+                <a href="{{route('countries.edit',$country->id)}}" class="inline-btn"><i class="fas fa-pencil" style="color:#ffffff !important;"></i> Edit</a>
+      <form action="{{ route('countries.destroy', $country->id)}}" method="post">
+                  @csrf
+                  @method('DELETE')
+                  <button class="inline-btn" type="submit">Delete</button>
+      </form>
                 </td>
             </tr>
             @endforeach

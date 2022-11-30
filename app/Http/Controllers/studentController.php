@@ -18,6 +18,7 @@ use App\Models\Quiz;
 use App\Models\Bookmark;
 use DB;
 use PDF;
+use Session;
 
 
 class studentController extends Controller
@@ -98,21 +99,30 @@ class studentController extends Controller
         return view('student.quiz/attempt-quiz',compact('course'));
     }
 
-    public function manageStudent(){
+    public function index(){
         $students = Student::latest()->get();
-        return view('admin.student/manage-student',compact('students'));
+        return view('admin.students/index',compact('students'));
+    }
+    public function edit($id){
+        $student = Student::find($id);
+        if(!$student){
+            Session::flash('error','Student not found');
+            return back();
+
+        }
+        return view('admin.students/edit',compact('student'));
     }
     public function studentProfile($id){
         $studentProfile = Student::find($id);
         $countBookmark = Bookmark::where('student_id','=',$studentProfile)->count();
-        return view('admin.student/view-student',compact('studentProfile','countBookmark'));
+        return view('admin.students/view-student',compact('studentProfile','countBookmark'));
     }
     public function searchStudent(Request $request){
         $search_student = $request->search_student;
         $students = Student::where('name','LIKE',"%{$search_student}%")->get(); 
-        return view('admin.student/manage-student',compact('students'));
+        return view('admin.students/manage-student',compact('students'));
     }
-    public function delete($id){
+    public function destroy($id){
         $delete = Student::find($id);
         if(!$delete){
             return back()->with('message','student details is not available'); 

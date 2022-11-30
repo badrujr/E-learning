@@ -4,24 +4,31 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Level;
+use Session;
 
 class LevelController extends Controller
 {
-    public function addLevel(){
-        return view('admin.level/add-level');
+    public function create(){
+        return view('admin.levels/create');
     }
-    public function saveLevel(request $request){
-        $level = new Level;
+    public function store(request $request){
 
+        $request->validate([
+            'name'=>'required|max:50|unique:levels'
+         ]);
+
+        $level = new Level;
         $level->name=$request->name;
+        
 
         if(!$level){
             return back()->with('message','course level details is not available'); 
         }
         try{
             
-          $level->save();
-          return back()->with('message','course level added succesfully'); 
+            $level->save();
+            Session::flash('success','course level is successfully saved');
+            return redirect('levels'); 
 
 
         }catch(\Exception $e){
@@ -31,35 +38,39 @@ class LevelController extends Controller
     
     }
 
-    public function manageLevel(){
+    public function index(){
         $levels = Level::latest()->get();
-        return view('admin.level/manage-level',compact('levels'));
+        return view('admin.levels/index',compact('levels'));
     }
-    public function editLevel($id){
-        $edit_level = Level::find($id);
-        return view('admin.level/edit-level',compact('edit_level'));
-    }
+    public function edit($id){
+        $level = Level::find($id);
+        if(!$level){
+            Session::flash('error','Level not found');
+            return back();
+          }
+          return view('admin.levels/edit',compact('level'));
+        }
+
     public function update(Request $request,$id){
-        $editlevel = Level::find($id);
+        $level = Level::find($id);
        
-        $editlevel->name=$request->name;
+        if(!$level){
+            Session::flash('error','Level not found');
+            return back();
+          }
+        $request->validate([
+            'name'=>'required|max:50|unique:levels,name,'.$id,
 
-        if(!$editlevel){
-            return back()->with('message','level details is not available'); 
-        }
-        try{
-            
-            $editlevel->save();
-          return back()->with('message','level updated succesfully'); 
+         ]);
+       
+        $level->name=$request->name;
+        $level->save();
 
-
-        }catch(\Exception $e){
-            return back()->with('message','An error occured'); 
-
-        }
-        return redirect()->back();
+        Session::flash('success','Level is successfully updated');
+        return redirect()->route('levels.index');
+       
     }
-    public function delete($id){
+    public function destroy($id){
         $delete = Level::find($id);
         if(!$delete){
             return back()->with('message','level details is not available'); 

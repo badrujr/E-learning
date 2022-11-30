@@ -4,24 +4,31 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Country;
+use Session;
 
 class CountryController extends Controller
 {
-    public function addCountry(){
-        return view('admin.country/add-country');
+    public function create(){
+        return view('admin.countries/create');
     }
-    public function saveCountry(request $request){
-        $country = new country;
+    public function store(request $request){
 
+        $request->validate([
+            'name'=>'required|max:50|unique:countries'
+         ]);
+
+        $country = new Country;
         $country->name=$request->name;
+        
 
         if(!$country){
-            return back()->with('message','Country details is not available'); 
+            return back()->with('message','country details is not available'); 
         }
         try{
             
-          $country->save();
-          return back()->with('message','country added succesfully'); 
+            $country->save();
+            Session::flash('success','country is successfully saved');
+            return redirect('countries'); 
 
 
         }catch(\Exception $e){
@@ -30,38 +37,47 @@ class CountryController extends Controller
         }
     
     }
-    public function manageCountry(){
+    public function index(){
         $countries = Country::latest()->get();
-        return view('admin.country/manage-country',compact('countries'));
+        return view('admin.countries/index',compact('countries'));
     }
-    public function editCountry($id){
-        $edit_country = Country::find($id);
-        return view('admin.country/edit-country',compact('edit_country'));
+    public function edit($id){
+        $country = Country::find($id);
+        return view('admin.countries/edit',compact('country'));
     }
     public function update(Request $request,$id){
-        $editcountry = Country::find($id);
+        $country = Country::find($id);
        
-        $editcountry->name=$request->name;
+        if(!$country){
+            Session::flash('error','Country not found');
+            return back();
+          }
+        $request->validate([
+            'name'=>'required|max:50|unique:countries,name,'.$id,
 
-        if(!$editcountry){
+         ]);
+       
+        $country->name=$request->name;
+        $country->save();
+
+        Session::flash('success','Country is successfully updated');
+        return redirect()->route('countries.index');
+    }
+    public function destroy($id){
+        $delete = Country::find($id);
+        if(!$delete){
             return back()->with('message','country details is not available'); 
         }
         try{
             
-            $editcountry->save();
-          return back()->with('message','country updated succesfully'); 
+          $delete->delete();
+          return back()->with('message','country removed succesfully'); 
 
 
         }catch(\Exception $e){
-            return back()->with('message','An error occured'); 
+            return back()->with('message','You can not remove this information due to the relationship'); 
 
         }
-        return redirect()->back();
-    }
-    public function delete($id){
-        $delete = Country::find($id);
-        $delete->delete();
-        return redirect()->back()->with('message','country removed succesfully');
 
     }
 }

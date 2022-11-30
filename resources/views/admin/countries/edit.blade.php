@@ -21,11 +21,12 @@
 
 <section class="form-container">
 
-   <form action="{{url('editcountry_form',$edit_country->id)}}" method="post" enctype="multipart/form-data">
-   @csrf
+   <form action="{{route('countries.update',$country->id)}}" method="post" enctype="multipart/form-data">
+   @method('PATCH') 
+            @csrf
       <h3>Edit country</h3>
       <p>name <span>*</span></p>
-      <input type="text" name="name" value="{{$edit_country->name}}"  required maxlength="50" class="box">
+      <input type="text" name="name" value="{{$country->name}}"  required maxlength="50" class="box">
       <input type="submit" value="submit" name="submit" class="btn">
       @if(session()->has('message'))
                     <div class="alert alert-success alert-has-icon" style="color:green; font-size:20px;">

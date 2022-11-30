@@ -43,31 +43,20 @@ use App\Http\Controllers\PDFController;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/signin',[HomeController::class,'signin']);
-Route::get('/signup',[HomeController::class,'signup']);
-Route::get('/',[HomeController::class,'index']);
-Route::get('/course',[HomeController::class,'course']);
-Route::get('/about',[HomeController::class,'about']);
-Route::get('/contact',[HomeController::class,'contact']);
-Route::get('/home',[HomeController::class,'redirect']);
-Route::post('/upload_message',[Message::class,'upload_message_function']);
-Route::post('/add-subscriber-email',[HomeController::class,'addSubscriber']);
-Route::get('/more_about/{id}',[HomeController::class,'more_about']);
+Route::middleware(['auth', 'isAdmin'])->group(function () {
+    Route::get('/admin', function () {
+      return view('home');
+    })->name('dashboard');
 
-Route::get('/admin/level/add-level',[LevelController::class,'addLevel']);
-Route::post('/upload_level',[LevelController::class,'saveLevel']);
-Route::get('/admin/level/manage-level',[LevelController::class,'manageLevel']);
-Route::get('/admin/level/edit-level/{id}',[LevelController::class,'editLevel']);
-Route::post('/editlevel_form/{id}',[LevelController::class,'update']);
-Route::get('/admin/delete-level/{id}',[LevelController::class,'delete']);
+    Route::resource('levels',LevelController::class);
+ Route::resource('countries',CountryController::class);
+Route::resource('students',studentController::class);
+Route::resource('payments',PaymentController::class);
 
-Route::get('/admin/country/add-country',[CountryController::class,'addCountry']);
-Route::post('/upload_country',[CountryController::class,'saveCountry']);
-Route::get('/admin/country/manage-country',[CountryController::class,'manageCountry']);
-Route::get('/admin/country/edit-country/{id}',[CountryController::class,'editCountry']);
-Route::post('/editcountry_form/{id}',[CountryController::class,'update']);
-Route::get('/admin/delete-country/{id}',[CountryController::class,'delete']);
-
+Route::get('/admin/student/trash-student-list',[studentController::class,'trash']);
+Route::get('/admin/restore-student/{id}',[studentController::class,'restore']);
+Route::get('/admin/permanent-delete-student/{id}',[studentController::class,'deleteStudentPermanent']);
+Route::post('/student_pdf',[studentController::class,'viewPdf']);
 
 Route::get('/admin/category/add-category',[CourseCategoryController::class,'addCategory']);
 Route::post('/upload_category',[CourseCategoryController::class,'saveCategory']);
@@ -80,6 +69,11 @@ Route::get('/admin/delete-category/{id}',[CourseCategoryController::class,'delet
 Route::get('/admin/about/add-about',[AboutUsController::class,'addAboutUs']);
 Route::post('/upload_about_us',[AboutUsController::class,'saveAboutUs']);
 Route::get('/admin/about/manage-about',[AboutUsController::class,'manageAboutUs']);
+
+
+
+
+
 
 
 Route::get('/admin/profession/add-profession',[ProfessionController::class,'addProfession']);
@@ -143,16 +137,7 @@ Route::get('/admin/edit-blog-info/{id}',[BlogController::class,'editBlog']);
 Route::post('/editblog_form/{id}',[BlogController::class,'update']);
 Route::get('/admin/delete-blog/{id}',[BlogController::class,'delete']);
 
-Route::get('/admin/student/add-student',[studentController::class,'addStudent']);
-Route::post('/upload_student',[studentController::class,'saveStudent']);
-Route::get('/admin/student/manage-student',[studentController::class,'manageStudent']);
-Route::get('/admin/edit-student/{id}',[studentController::class,'editStudent']);
-Route::post('/editstudent_form/{id}',[studentController::class,'update']);
-Route::get('/admin/delete-student/{id}',[studentController::class,'delete']);
-Route::get('/admin/student/trash-student-list',[studentController::class,'trash']);
-Route::get('/admin/restore-student/{id}',[studentController::class,'restore']);
-Route::get('/admin/permanent-delete-student/{id}',[studentController::class,'deleteStudentPermanent']);
-Route::post('/student_pdf',[studentController::class,'viewPdf']);
+
 
 
 
@@ -181,6 +166,21 @@ Route::get('/decline_feed/{id}',[AdminController::class,'decline_fun']);
 Route::get('/add_faq_view',[AdminController::class,'add_faq_view']);
 
 Route::get('/user_activity',[AdminController::class,'activityLogs']);
+  });
+
+Route::get('/signin',[HomeController::class,'signin']);
+Route::get('/signup',[HomeController::class,'signup']);
+Route::get('/',[HomeController::class,'index']);
+Route::get('/course',[HomeController::class,'course']);
+Route::get('/about',[HomeController::class,'about']);
+Route::get('/contact',[HomeController::class,'contact']);
+Route::get('/home',[HomeController::class,'redirect']);
+Route::post('/upload_message',[Message::class,'upload_message_function']);
+Route::post('/add-subscriber-email',[HomeController::class,'addSubscriber']);
+Route::get('/more_about/{id}',[HomeController::class,'more_about']);
+
+
+
 
 
 Route::get('/student/admission/fill-admission-form',[studentController::class,'fillAdmissionForm']);
@@ -211,6 +211,12 @@ Route::get('/admin/approve-testimonial/{id}',[TestimonialController::class,'appr
 Route::get('/admin/delete-testimonial/{id}',[TestimonialController::class,'delete']);
 
 Route::get('/generate-pdf', [AdminController::class, 'generatePDF']);
+
+
+Route::post('pay', [PaymentController::class, 'pay'])->name('payment');
+Route::get('success', [PaymentController::class, 'success']);
+Route::get('error', [PaymentController::class, 'error']);
+
 
 
 
