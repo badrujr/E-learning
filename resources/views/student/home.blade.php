@@ -65,7 +65,7 @@
       <div class="box">
          <h3 class="title">Student</h3>
          <p class="tutor">Minat Bakery Academy have reached more than {{$students}}k+ students in Mombasa - Kenya</p>
-         <a href="{{url('student/showcourses')}}" class="inline-btn">get started</a>
+         <a href="{{url('/student/admission/fill-admission-form')}}" class="inline-btn">get started</a>
       </div>
 
    </div>
