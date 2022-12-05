@@ -4,11 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
+use Session;
 
 class UserController extends Controller
 {
-    public function addUser(){
-        return view('admin.users/add-user');
+    public function create(){
+        return view('admin.users/create');
     }
     public function saveUser(request $request){
         $user = new User;
@@ -31,13 +34,21 @@ class UserController extends Controller
     
     }
 
-    public function manageUser(){
+    public function index(){
         $users = User::latest()->get();
-        return view('admin.users/manage-user',compact('users'));
+        return view('admin.users/index',compact('users'));
     }
-    public function editUser($id){
-        $edit_user = User::find($id);
-        return view('admin.users/edit-user',compact('edit_user'));
+    public function show($id){
+        $roles = Role::all();
+        $permissions = Permission::all();
+        $user = User::find($id);
+        return view('admin.users/show',compact('user','roles','permissions'));
+
+
+    }
+    public function edit($id){
+        $user = User::find($id);
+        return view('admin.users/edit',compact('user'));
     }
     public function update(Request $request,$id){
         $editUser = User::find($id);
@@ -59,21 +70,115 @@ class UserController extends Controller
         }
         return redirect()->back();
     }
-    public function delete($id){
-        $delete = User::find($id);
-        if(!$delete){
-            return back()->with('message','user details is not available'); 
-        }
+    public function destroy($id){
+        $user = User::find($id);
+        if(!$user){
+            Session::flash('error','User not found');
+            return back();
+          }
+          elseif($user->hasRole('admin')){
+            Session::flash('success','Your an admin!');
+            return redirect('users');
+          }
+     
         try{
             
-          $delete->delete();
-          return back()->with('message','user removed succesfully'); 
-
+            $user->delete();
+            Session::flash('success','User is successfully deleted ');
+            return redirect('users');
+         
 
         }catch(\Exception $e){
-            return back()->with('message','You can not delete this information'); 
-
+            Session::flash('error',$e->getMessage());
+            return redirect('users');
         }
+       
 
+    }
+
+    public function assignRole(Request $request){
+        $request->validate([
+            'role_id'=>'required',
+            'user_id'=>'required'
+         ]);
+        $role= Role::find($request->role_id);
+         if(!$role){
+            Session::flash('error','Role  not found');
+            return back();
+         }
+
+         $user=User::find($request->user_id);
+
+         if(!$user){
+            Session::flash('error','User not found');
+            return back();
+         }
+       
+        if($user->hasRole($role->name)){
+            Session::flash('success','Role exists ');
+            return redirect('users.edit');
+        }
+        $user->assignRole($role->name);
+        Session::flash('success','User role assign granted successfully ');
+            return redirect('users');
+    }
+
+    public function removeRole(User $user, Role $role){
+        if($user->hasRole($role)){
+            $user->removeRole($role);
+            Session::flash('success','User Role removed successfully ');
+            return redirect('users.edit');
+        }
+        Session::flash('error','User Role does not exists ');
+            return redirect('users.edit');
+    }
+
+    public function givePermission(Request $request){ 
+        $request->validate([
+            'user_id'=>'required',
+            'permission_id'=>'required'
+         ]);
+        $permission= Permission::find($request->permission_id);
+         if(!$permission){
+            Session::flash('error','Permission  not found');
+            return back();
+         }
+
+         $user=User::find($request->user_id);
+
+         if(!$user){
+            Session::flash('error','User  not found');
+            return back();
+         }
+       
+        if($user->hasPermissionTo($permission->name)){
+            Session::flash('success','Permission exists ');
+            return redirect('users.edit');
+        }
+        $user->givePermissionTo($permission->name);
+        Session::flash('success','Permission granted successfully ');
+            return redirect('users');
+    }
+    public function revokePermission(User $user, Permission $permission){
+    
+        $permission= Permission::find($permission);
+         if(!$permission){
+            Session::flash('error','Permission  not found and unnassigned');
+            return back();
+         }
+
+         $user=User::find($user);
+         if(!$user){
+            Session::flash('error','User  not found');
+            return back();
+         }
+
+        if($user->hasPermissionTo($permission)){
+            $user->revokePermissionTo($permission);
+            Session::flash('success','Permission revoked successfully ');
+            return redirect('users');
+        }
+        Session::flash('success','Permission do not exits ');
+            return redirect('users');
     }
 }

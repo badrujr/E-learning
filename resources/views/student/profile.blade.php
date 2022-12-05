@@ -39,11 +39,11 @@
             <div class="flex">
                <i class="fas fa-bookmark"></i>
                <div>
-                  <span>4</span>
+                  <span>{{$countbookmark}}</span>
                   <p>saved playlist</p>
                </div>
             </div>
-            <a href="#" class="inline-btn">view playlists</a>
+            <a href="{{url('student/bookmark/view-video-bookmark')}}" class="inline-btn">view playlists</a>
          </div>
    
          <div class="box">
@@ -65,8 +65,7 @@
                   <p>videos comments</p>
                </div>
             </div>
-            <a href="#" class="inline-btn">view comments</a>
-         </div>
+       
    
       </div>
    </div>

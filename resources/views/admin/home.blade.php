@@ -32,6 +32,18 @@
          <a href="{{url('students/')}}" class="btn">view student</a>
       </div>
       <div class="box">
+      
+         <p>Roles</p>
+         <a href="{{url('roles/create')}}" class="btn">add new role</a>
+         <a href="{{url('roles/')}}" class="btn">view role</a>
+      </div>
+      <div class="box">
+         
+         <p>Permissions</p>
+         <a href="{{url('permissions/create')}}" class="btn">add new permission</a>
+         <a href="{{url('permissions/')}}" class="btn">view permission</a>
+      </div>
+      <div class="box">
          <h3>{{$country}}</h3>
          <p>total countries</p>
          <a href="{{url('countries/create')}}" class="btn">add new country</a>

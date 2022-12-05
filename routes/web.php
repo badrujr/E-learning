@@ -24,6 +24,8 @@ use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\BookmarkController;
 use App\Http\Controllers\MpesaController;
+use App\Http\Controllers\RoleController;
+use App\Http\Controllers\PermissionController;
 
 use App\Http\Controllers\PDFController;
 
@@ -48,10 +50,24 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
       return view('home');
     })->name('dashboard');
 
-    Route::resource('levels',LevelController::class);
- Route::resource('countries',CountryController::class);
+
+Route::resource('users',UserController::class);    
+Route::resource('levels',LevelController::class);
+Route::resource('countries',CountryController::class);
 Route::resource('students',studentController::class);
 Route::resource('payments',PaymentController::class);
+Route::resource('roles',RoleController::class);
+Route::resource('permissions',PermissionController::class);
+Route::post('/roles/permissions',[RoleController::class,'givePermission'])->name('roles.permissions');
+Route::delete('/roles/{role}/permissions/{permission}',[RoleController::class,'revokePermission'])->name('roles.permissions.revoke');
+Route::resource('permissions',PermissionController::class);
+Route::post('/permissions/roles',[PermissionController::class,'assignRole'])->name('permissions.roles');
+Route::delete('/permissions/{permission}/roles/{role}',[PermissionController::class,'removeRole'])->name('permissions.roles.remove');
+Route::resource('users',UserController::class);
+Route::post('/users/roles',[UserController::class,'assignRole'])->name('users.roles');
+Route::delete('/users/{user}/roles/{role}',[UserController::class,'removeRole'])->name('users.roles.remove');
+Route::post('/users/permissions',[UserController::class,'givePermission'])->name('users.permissions');
+Route::delete('/users/{user}/permissions/{permission}',[UserController::class,'revokePermission'])->name('users.permissions.revoke');
 
 Route::get('/admin/student/trash-student-list',[studentController::class,'trash']);
 Route::get('/admin/restore-student/{id}',[studentController::class,'restore']);
@@ -140,13 +156,6 @@ Route::get('/admin/delete-blog/{id}',[BlogController::class,'delete']);
 
 
 
-
-Route::get('/admin/users/add-user',[UserController::class,'addUser']);
-Route::post('/upload_user',[UserController::class,'saveUser']);
-Route::get('/admin/users/manage-user',[UserController::class,'manageUser']);
-Route::get('/admin/edit-user/{id}',[UserController::class,'editUser']);
-Route::post('/edituser_form/{id}',[UserController::class,'update']);
-Route::get('/admin/delete-user/{id}',[UserController::class,'delete']);
 
 
 Route::get('/showteam',[AdminController::class,'showteam']);

@@ -16,6 +16,8 @@ use App\Models\CourseCategory;
 use App\Models\CourseVideo;
 use App\Models\Quiz;
 use App\Models\Bookmark;
+use App\Models\Comment;
+use App\Models\Payment;
 use DB;
 use PDF;
 use Session;
@@ -68,7 +70,8 @@ class studentController extends Controller
  
     public function showcourses(){
         $courses = Course::latest()->get();
-        return view('student.course/showcourse',compact('courses'));
+        $payment = DB::table('payments')->where('payment_status','approved')->where('student_id','=',Auth::user()->student->id)->first();
+        return view('student.course/showcourse',compact('courses','payment'));
     }
     public function playlist(){
         return view('student.view_playlist');
@@ -82,7 +85,11 @@ class studentController extends Controller
         return view('student.video/watch-video',compact('courseVideo'));
     }
     public function profile(){
-        return view('student.profile');
+        $userIdBookmark = Bookmark::where('student_id','=',Auth::user()->student->id)
+        ->orWhere('student_id','=',null)
+        ->get();
+        $countbookmark = $userIdBookmark->count();
+        return view('student.profile',compact('countbookmark'));
     }
     public function tutor(){
         $tutors = Tutor::latest()->get();

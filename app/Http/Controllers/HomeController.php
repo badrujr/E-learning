@@ -33,17 +33,9 @@ class HomeController extends Controller
                 $students = Student::all()->count();
                 $courses = Course::latest()->get();
                 $count = CourseVideo::all()->count();
-
-
                 $levels = Level::all();
-                $userIdBookmark = Bookmark::where('student_id','=',Auth::user()->student->id)
-                            ->orWhere('student_id','=',null)
-                            ->get();
-                $countbookmark = $userIdBookmark->count();
-              
-
-                $payment = DB::table('payments')->where('payment_status','approved')->where('student_id','=',Auth::user()->student->id)->first();
-                return view('student.home',compact('categories','students','courses','count','levels','countbookmark','payment'));
+               
+                return view('student.home',compact('categories','students','courses','count','levels'));
             }
           
             else{
@@ -76,8 +68,8 @@ class HomeController extends Controller
           $categories = CourseCategory::inRandomOrder()->limit(6)->get();
           $courses = Course::inRandomOrder()->limit(6)->get();
           $blogs = Blog::inRandomOrder()->limit(6)->get();
-         $testimonials = Testimonial::inRandomOrder()->limit(1)->where('publish','=',1)->get();
-            return view('home',compact('aboutus','teams','categories','courses','blogs','testimonials'));
+          $testimonials = Testimonial::inRandomOrder()->limit(1)->where('publish','=',1)->get();
+          return view('home',compact('aboutus','teams','categories','courses','blogs','testimonials'));
         }
        
     }

@@ -13,7 +13,7 @@
 
    <nav class="navbar">
       <a href="{{url('/home')}}"><i class="fas fa-home"></i><span>Home</span></a>
-      <a href="{{url('/admin/users/manage-user')}}"><i class="fas fa-users"></i><span>User management</span></a>
+      <a href="{{url('users/')}}"><i class="fas fa-users"></i><span>User management</span></a>
       <a href="{{url('/admin/team/manage-team')}}"><i class="fas fa-user"></i><span>Team</span></a>
       <a href="{{url('/admin/about/add-about')}}"><i class="fas fa-shop"></i><span>About us</span></a>
       <a href="{{url('admin/blog/manage-blog-info')}}"><i class="fas fa-spinner"></i><span>Blog</span></a>

@@ -32,17 +32,7 @@
          <a href="#" class="inline-btn">view likes</a>
         
          <a href="#" class="inline-btn">view comments</a>
-         <p class="likes">saved playlists : 
-            <span>
-               @if($countbookmark == null)
-               0
-               @else
-               {{$countbookmark}}
-               @endif
-               
-            </span>
-         </p>
-         <a href="{{url('student/bookmark/view-video-bookmark')}}" class="inline-btn">view playlists</a>
+         
       </div>
 
       <div class="box">
@@ -84,56 +74,6 @@
 
 
 
-<section class="courses">
-   <h1 class="heading">our courses</h1>
-   <div class="box-container">
-   @forelse($courses as $key=>$course)
-         <div class="box">
-         <div class="tutor">
-            <img src="tutorimage/{{$course->tutor->image}}" alt="">
-            <div class="info">
-               <h3>{{$course->tutor->name}}</h3>
-               
-               <span>{{$course->created_at}}</span>
-            </div>
-         </div>
-         <div class="thumb">
-            <img src="coursecategoryimage/{{$course->courseCategory->image}}" alt="">
-            <span>{{$count}} videos</span>
-         </div>
-         <h3 class="title">{{$course->courseCategory->name}}</h3>
-         <p style="font-size:18px;">USD {{number_format($course->price)}}/=</p>
-         @if(is_null($payment))
-         <form action="{{url('upload_cart')}}" method="post" enctype="multipart/form-data">
-            @csrf
-            <input type="hidden" value="{{Auth::user()->student->id}}" name="student_id"/>            
-            <input type="hidden" value="{{$course->id}}" name="course_id"/>
-            <input type="hidden" value="{{$course->price}}" name="price"/>
-            <input type="submit" value="Add to cart" name="submit" class="inline-btn">
-         </form>
-        @elseif($payment == '')
-        <form action="{{url('upload_cart')}}" method="post" enctype="multipart/form-data">
-            @csrf
-            <input type="hidden" value="{{Auth::user()->student->id}}" name="student_id"/>            
-            <input type="hidden" value="{{$course->id}}" name="course_id"/>
-            <input type="hidden" value="{{$course->price}}" name="price"/>
-            <input type="submit" value="Add to cart" name="submit" class="inline-btn">
-         </form>
-         @else
-         <a href="{{url('student/video/playlist',$course->id)}}" class="inline-btn">view playlist</a>
-         @endif
-      </div>
-      @empty
-      <div class="box container">
-		<p style="color:red; font-size:20px;">No course available</p>
-      </div>
-	
-	@endforelse
-   </div>
-   <div class="more-btn">
-      <a href="{{url('student/showcourses')}}" class="inline-option-btn">view all courses</a>
-   </div>
-</section>
 
 
 <!-- custom js file link  -->

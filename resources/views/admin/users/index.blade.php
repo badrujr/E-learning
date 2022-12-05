@@ -40,8 +40,7 @@
 <div class="box offer">
       <h3>add new user</h3>
       <p>Minat Cake Zone Academy is a baking school knowledge market place for bakers and beginners in baking. We provide a platform for experienced bakers to perfect their skills.</p>
-      <a href="{{url('admin/users/add-user')}}" class="inline-btn">add new user</a>
-      <a href="{{url('admin/roles/manage-role')}}" class="inline-btn">add role and permission</a>
+      <a href="{{url('users/create')}}" class="inline-btn">add new user</a>
    </div>
    @forelse($users as $user)
    <div class="box">
@@ -60,8 +59,21 @@
       <p>Email: {{$user->email}}</p>
       <p>Created at: {{$user->created_at}}</p>
       <p>Updated at: {{$user->updated_at}}</p>
-      <a href="{{url('admin/users/edit-user',$user->id)}}" class="inline-btn"><i class="fas fa-pencil" style="color:#ffffff !important;"></i> Edit</a>
-      <a href="{{url('admin/delete-user',$user->id)}}" onclick="return confirm('Are you sure you want to delete?')" class="inline-btn"><i class="fas fa-trash" style="color:red !important;"></i> Delete</a>
+      @role('admin')
+      <a href="{{route('users.show',$user->id)}}" class="inline-btn"><i class="fas fa-eye" style="color:#ffffff !important;"></i> Roles</a>
+      <a href="{{route('users.edit',$user->id)}}" class="inline-btn"><i class="fas fa-pencil" style="color:#ffffff !important;"></i> Edit</a>
+      <form action="{{ route('users.destroy', $user->id)}}" method="post">
+                  @csrf
+                  @method('DELETE')
+                  <button class="inline-btn" type="submit"><i class="fas fa-trash" style="color:red !important;"></i> Delete</button>
+      </form>
+      @else
+      <form action="{{ route('users.destroy', $user->id)}}" method="post">
+                  @csrf
+                  @method('DELETE')
+                  <button class="inline-btn" type="submit"><i class="fas fa-trash" style="color:red !important;"></i> Delete</button>
+      </form>
+      @endrole
    </div>
    @empty
 			<div class="box offer">

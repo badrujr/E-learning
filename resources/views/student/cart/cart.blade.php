@@ -143,7 +143,7 @@ $total = CartController::cartItem();
 
 <section class="teachers">
 
-   <h1 class="heading">Your cart ({{$total}})</h1>
+   <h1 class="heading">Your cart ()</h1>
    <div class="container">
       <div class="cart cart-heading">
         <h3>Your cart</h3>

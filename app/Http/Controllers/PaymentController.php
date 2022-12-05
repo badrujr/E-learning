@@ -7,6 +7,9 @@ use App\Models\Cart;
 use App\Models\Course;
 use Omnipay\Omnipay;
 use App\Models\Payment;
+use App\Models\Student;
+use Session;
+use Auth;
 
 class PaymentController extends Controller
 {
@@ -69,14 +72,15 @@ class PaymentController extends Controller
                 $payment->payment_id = $arr['id'];
                 $payment->payer_id = $arr['payer']['payer_info']['payer_id'];
                 $payment->payer_email = $arr['payer']['payer_info']['email'];
-                $payment->student_id = 9;
+                $payment->student_id = $request->student_id;
                 $payment->amount = $arr['transactions'][0]['amount']['total'];
                 $payment->currency = env('PAYPAL_CURRENCY');
                 $payment->payment_status = $arr['state'];
 
                 $payment->save();
 
-                return "Payment is Successfull. Your Transaction Id is : " . $arr['id'];
+                return redirect('home')->with('success','Payment is Successfull'. $arr['id']);
+
 
             }
             else{
